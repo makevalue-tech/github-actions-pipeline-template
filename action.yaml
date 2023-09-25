@@ -43,6 +43,12 @@ runs:
     - name: Get git repository informations
       uses: makevalue-tech/github-actions-git-informations@master
 
+    - name: Set up JDK version
+      uses: actions/setup-java@v3
+      with:
+        distribution: ${{ inputs.java-distribution }}
+        java-version: ${{ inputs.java-version }}
+
     - name: Cache Maven packages
       uses: actions/cache@v1
       with:
@@ -51,7 +57,7 @@ runs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: 'Create settings.xml'
-      uses: whelk-io/maven-settings-xml-action@v16
+      uses: whelk-io/maven-settings-xml-action@v21
       with:
         repositories: |
           [
@@ -71,12 +77,6 @@ runs:
               "password": "${{ inputs.github-token }}"
             }
           ]
-
-    - name: Set up JDK version
-      uses: actions/setup-java@v3
-      with:
-        distribution: ${{ inputs.java-distribution }}
-        java-version: ${{ inputs.java-version }}
 
     - name: MVN Package
       shell: bash
