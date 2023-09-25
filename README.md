@@ -45,6 +45,7 @@ There are no outputs for this action
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
               github-deploy-ssh-key: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}
+              java-distribution: 'Java distribution name'
               java-version: '17'
               k8s-manifest-repo-name: '<to fill>'
               k8s-manifest-repo-ssh: '<to fill>'
@@ -74,6 +75,7 @@ If you wants to update or make changes in module code you should use the **devel
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
               github-deploy-ssh-key: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}
+              java-distribution: 'Java distribution name'
               java-version: '17'
               k8s-manifest-repo-name: '<to fill>'
               k8s-manifest-repo-ssh: '<to fill>'
