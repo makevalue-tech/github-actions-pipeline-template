@@ -10,6 +10,7 @@ This GitHub Action module automates the process of building a Docker image an a 
 - **gcp-registry-project-id:** 'GCP Registry account project ID'
 - **gcp-registry-service-account:** 'GCP service account JSON to push images to registry'
 - **github-deploy-ssh-key:** 'The github deploy SSH key to clone K8S manifests'
+- **github-package-url:** 'The github package URL to download application packages'
 - **github-token:** 'The github token to create PR'
 - **java-version:** 'Java version'
 - **k8s-manifest-repo-name:** 'The name of K8S manifests repository'
@@ -44,6 +45,7 @@ There are no outputs for this action
               gcp-registry-project-id: 'GCP Registry account project ID'
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
               github-deploy-ssh-key: '<to fill>'
+              github-package-url: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}
               java-distribution: 'Java distribution name'
               java-version: '17'
@@ -74,6 +76,7 @@ If you wants to update or make changes in module code you should use the **devel
               gcp-registry-project-id: 'GCP Registry account project ID'
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
               github-deploy-ssh-key: '<to fill>'
+              github-package-url: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}
               java-distribution: 'Java distribution name'
               java-version: '17'

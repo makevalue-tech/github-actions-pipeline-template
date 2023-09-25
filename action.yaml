@@ -14,6 +14,9 @@ inputs:
   github-deploy-ssh-key:
     description: 'The github deploy SSH key to clone K8S manifests'
     required: true
+  github-package-url:
+    description: 'The github package URL to download application packages'
+    required: true
   github-token:
     description: 'The github token to create PR'
     required: true
@@ -36,6 +39,35 @@ runs:
   steps:
     - name: Get git repository informations
       uses: makevalue-tech/github-actions-git-informations@master
+
+    - name: Cache Maven packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: 'Create settings.xml'
+      uses: whelk-io/maven-settings-xml-action@v16
+      with:
+        repositories: |
+          [
+            {
+              "id": "github",
+              "url": "${{ inputs.github-package-url }}",
+              "snapshots": {
+                "enabled": "true"
+              }
+            }
+          ]
+        servers: |
+          [
+            {
+              "id": "github",
+              "username": "${{ github.actor }}",
+              "password": "${{ inputs.github-token }}"
+            }
+          ]
 
     - name: Set up JDK version
       uses: actions/setup-java@v3
