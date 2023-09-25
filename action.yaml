@@ -1,5 +1,5 @@
-name: 'Go lang pipeline'
-description: 'Go Lang Docker Build, AWS ECR Push and Kustomize step'
+name: 'Application pipeline'
+description: 'Docker Build, GCP registry push and Kustomize step'
 
 inputs:
   app-name:
