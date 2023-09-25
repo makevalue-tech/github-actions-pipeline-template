@@ -44,6 +44,7 @@ There are no outputs for this action
               app-name: '<to fill>'
               gcp-registry-project-id: 'GCP Registry account project ID'
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
+              github-actor: 'GH Actor'
               github-deploy-ssh-key: '<to fill>'
               github-package-url: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -75,6 +76,7 @@ If you wants to update or make changes in module code you should use the **devel
               app-name: '<to fill>'
               gcp-registry-project-id: 'GCP Registry account project ID'
               gcp-registry-service-account: 'GCP service account JSON to push images to registry'
+              github-actor: 'GH Actor'
               github-deploy-ssh-key: '<to fill>'
               github-package-url: '<to fill>'
               github-token: ${{ secrets.GITHUB_TOKEN }}

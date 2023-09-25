@@ -11,6 +11,9 @@ inputs:
   gcp-registry-service-account:
     description: 'GCP service account JSON to push images to registry'
     required: true
+  github-actor:
+    description: 'GH Actor'
+    required: true
   github-deploy-ssh-key:
     description: 'The github deploy SSH key to clone K8S manifests'
     required: true
@@ -64,7 +67,7 @@ runs:
           [
             {
               "id": "github",
-              "username": "${{ github.actor }}",
+              "username": "${{ inputs.github-actor }}",
               "password": "${{ inputs.github-token }}"
             }
           ]
