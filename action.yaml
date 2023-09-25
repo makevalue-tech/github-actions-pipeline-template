@@ -1,0 +1,65 @@
+name: 'Go lang pipeline'
+description: 'Go Lang Docker Build, AWS ECR Push and Kustomize step'
+
+inputs:
+  app-name:
+    description: 'The app name'
+    required: true
+  gcp-registry-project-id:
+    description: 'GCP Registry account project ID'
+    required: true
+  gcp-registry-service-account:
+    description: 'GCP service account JSON to push images to registry'
+    required: true
+  github-deploy-ssh-key:
+    description: 'The github deploy SSH key to clone K8S manifests'
+    required: true
+  github-token:
+    description: 'The github token to create PR'
+    required: true
+  java-version:
+    description: 'Java version'
+    required: true
+    default: 17
+  k8s-manifest-repo-name:
+    description: 'The name of K8S manifests repository'
+    required: true
+  k8s-manifest-repo-ssh:
+    description: 'The SSH of K8S manifests repository'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get git repository informations
+      uses: makevalue-tech/github-actions-git-informations@main
+
+    - name: Set up JDK version
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ inputs.java-version }}
+
+    - name: MVN Package
+      shell: bash
+      run: mvn -B package --file pom.xml -DskipTests
+
+    - name: Push Image to GCR
+      uses: RafikFarhad/push-to-gcr-github-action@v3.0.2
+      with:
+        gcloud_service_key: ${{ inputs.gcp-registry-service-account }}
+        registry: gcr.io
+        project_id: ${{ inputs.gcp-registry-project-id }}
+        image_name: ${{ inputs.app-name }}
+        image_tag: ${{ env.RELEASE_VERSION }}
+        dockerfile: ./pipeline/Dockerfile
+
+    - name: Kustomize step
+      uses: makevalue-tech/github-actions-kustomize-argocd-manifests@main
+      with:
+        app-name: ${{ inputs.app-name }}
+        app-registry: ${{ steps.login-ecr.outputs.registry }}
+        github-actor: ${{ github.actor }}
+        github-deploy-ssh-key: '${{ inputs.github-deploy-ssh-key }}'
+        github-token: '${{ inputs.github-token }}'
+        k8s-manifest-repo-name: '${{ inputs.k8s-manifest-repo-name }}'
+        k8s-manifest-repo-ssh: '${{ inputs.k8s-manifest-repo-ssh }}'
