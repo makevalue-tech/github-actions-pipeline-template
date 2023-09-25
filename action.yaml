@@ -32,7 +32,7 @@ runs:
   using: "composite"
   steps:
     - name: Get git repository informations
-      uses: makevalue-tech/github-actions-git-informations@main
+      uses: makevalue-tech/github-actions-git-informations@master
 
     - name: Set up JDK version
       uses: actions/setup-java@v3
@@ -54,7 +54,7 @@ runs:
         dockerfile: ./pipeline/Dockerfile
 
     - name: Kustomize step
-      uses: makevalue-tech/github-actions-kustomize-argocd-manifests@main
+      uses: makevalue-tech/github-actions-kustomize-argocd-manifests@master
       with:
         app-name: ${{ inputs.app-name }}
         app-registry: ${{ steps.login-ecr.outputs.registry }}
