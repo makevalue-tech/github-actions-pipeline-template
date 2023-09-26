@@ -5,6 +5,9 @@ inputs:
   app-name:
     description: 'The app name'
     required: true
+  app-registry:
+    description: 'The app GCP registry'
+    required: true
   gcp-registry-project-id:
     description: 'GCP Registry account project ID'
     required: true
@@ -98,7 +101,7 @@ runs:
       uses: makevalue-tech/github-actions-kustomize-argocd-manifests@master
       with:
         app-name: ${{ inputs.app-name }}
-        app-registry: ${{ steps.login-ecr.outputs.registry }}
+        app-registry: ${{ inputs.app-registry }}
         github-actor: ${{ github.actor }}
         github-deploy-ssh-key: '${{ inputs.github-deploy-ssh-key }}'
         github-token: '${{ inputs.github-token }}'

@@ -7,11 +7,13 @@ This GitHub Action module automates the process of building a Docker image an a 
 ## Inputs
 
 - **app-name:** 'The app name'
+- **app-registry:** 'The app GCP registry'
 - **gcp-registry-project-id:** 'GCP Registry account project ID'
 - **gcp-registry-service-account:** 'GCP service account JSON to push images to registry'
+- **github-actor:** 'The commit author'
 - **github-deploy-ssh-key:** 'The github deploy SSH key to clone K8S manifests'
 - **github-package-url:** 'The github package URL to download application packages'
-- **github-token:** 'The github token to create PR'
+- **github-token:** 'The github token to download the application packages and create th GitOps PR from sandbox branch to master'
 - **java-version:** 'Java version'
 - **k8s-manifest-repo-name:** 'The name of K8S manifests repository'
 - **k8s-manifest-repo-ssh:** 'The SSH of K8S manifests repository'
@@ -41,17 +43,18 @@ There are no outputs for this action
           - uses: actions/checkout@v3
             uses: makevalue-tech/github-actions-pipeline-template@main
             with:
-              app-name: '<to fill>'
-              gcp-registry-project-id: 'GCP Registry account project ID'
-              gcp-registry-service-account: 'GCP service account JSON to push images to registry'
-              github-actor: 'GH Actor'
-              github-deploy-ssh-key: '<to fill>'
-              github-package-url: '<to fill>'
-              github-token: ${{ secrets.GITHUB_TOKEN }}
+              app-name: '<The app name>'
+              app-registry: '<The app GCP registry>'
+              gcp-registry-project-id: '<GCP Registry account project ID>'
+              gcp-registry-service-account: '<GCP service account JSON to push images to registry>'
+              github-actor: '<The commit author>'
+              github-deploy-ssh-key: '<The github deploy SSH key to clone K8S manifests>'
+              github-package-url: '<The github package URL to download application packages>'
+              github-token: '<The github token to download the application packages and create th GitOps PR from sandbox branch to master>'
               java-distribution: 'Java distribution name'
-              java-version: '17'
-              k8s-manifest-repo-name: '<to fill>'
-              k8s-manifest-repo-ssh: '<to fill>'
+              java-version: '<Java version eg. 17>'
+              k8s-manifest-repo-name: '<The name of K8S manifests repository>'
+              k8s-manifest-repo-ssh: '<The SSH of K8S manifests repository>'
 ```
 
 ## How to send updates?
@@ -73,16 +76,17 @@ If you wants to update or make changes in module code you should use the **devel
           - uses: actions/checkout@v3
             uses: makevalue-tech/github-actions-pipeline-template@develop
             with:
-              app-name: '<to fill>'
-              gcp-registry-project-id: 'GCP Registry account project ID'
-              gcp-registry-service-account: 'GCP service account JSON to push images to registry'
-              github-actor: 'GH Actor'
-              github-deploy-ssh-key: '<to fill>'
-              github-package-url: '<to fill>'
-              github-token: ${{ secrets.GITHUB_TOKEN }}
+              app-name: '<The app name>'
+              app-registry: '<The app GCP registry>'
+              gcp-registry-project-id: '<GCP Registry account project ID>'
+              gcp-registry-service-account: '<GCP service account JSON to push images to registry>'
+              github-actor: '<The commit author>'
+              github-deploy-ssh-key: '<The github deploy SSH key to clone K8S manifests>'
+              github-package-url: '<The github package URL to download application packages>'
+              github-token: '<The github token to download the application packages and create th GitOps PR from sandbox branch to master>'
               java-distribution: 'Java distribution name'
-              java-version: '17'
-              k8s-manifest-repo-name: '<to fill>'
-              k8s-manifest-repo-ssh: '<to fill>'
+              java-version: '<Java version eg. 17>'
+              k8s-manifest-repo-name: '<The name of K8S manifests repository>'
+              k8s-manifest-repo-ssh: '<The SSH of K8S manifests repository>'
 ```
 After execute all tests you can open a pull request to the main branch.
